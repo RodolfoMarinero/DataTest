@@ -1,7 +1,11 @@
 package com.rodolfo.DataTest.controller;
 
+
+import java.util.Optional;
+
 import java.util.ArrayList;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,19 +26,14 @@ public class TesistaController {
     @Autowired
     private TesistaService service;
 
-    @PostMapping("/addTesistaPath/{matricula}/{nombre}/{apellidos}/{carrera}/{tituloTesis}/{directorTesis}/{codirectorTesis}/{fechaInicio}/{fechaFinal}/{correoElectronico}/{contrasena}/{notificacion}/{revisor1}/{revisor2}/{tareas}")
-    public void createTesistaWithPathVariable(@PathVariable String matricula, @PathVariable String nombre, @PathVariable String apellidos, @PathVariable String carrera, @PathVariable String tituloTesis, @PathVariable String directorTesis, @PathVariable String codirectorTesis, @PathVariable String fechaInicio, @PathVariable String fechaFinal, @PathVariable String correoElectrinico, @PathVariable String contrasena, @PathVariable boolean notificacion, @PathVariable String revisor1, @PathVariable String revisor2){
-        Tesista a=new Tesista(matricula,nombre,apellidos,carrera,tituloTesis,directorTesis,codirectorTesis,fechaInicio,fechaFinal,correoElectrinico,contrasena,notificacion,revisor1,revisor2);
-        service.saveUser(a);
-    }
 
-    @PostMapping("/addTesistaRequest")  
-    public void createTesistaWithRequestBody(@RequestBody Tesista tesista){
+    @PostMapping("/addTesistaRequest")
+    public void createTesistaWithRequestBody(@RequestBody Tesista tesista) {
         service.saveUser(tesista);
     }
 
     @DeleteMapping("deleteTesista/{matricula}")
-    public void deleteTesista(@PathVariable String matricula){
+    public void deleteTesista(@PathVariable String matricula) {
         service.deleteUser(matricula);
     }
 
@@ -42,6 +41,12 @@ public class TesistaController {
     public Iterable<Tesista> getAllTesista() {
         return service.getAllUsers();
     }
+
+    @PostMapping("/agregarTareaA/{matricula}")
+    public Tesista addTareaToTesista(@PathVariable String matricula, @RequestBody Tarea tarea) {
+        return service.addTareaToTesista(matricula, tarea);
+    }
+
 
     @GetMapping("/filtroPorRevisor/{matricula}")
         public Iterable<Tesista> getTesistaByRevisor(@PathVariable String matricula) {
@@ -87,5 +92,5 @@ public class TesistaController {
     }
 
     
-    
+
 }
