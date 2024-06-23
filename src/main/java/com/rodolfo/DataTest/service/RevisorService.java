@@ -5,30 +5,27 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rodolfo.DataTest.model.Tesista;
-import com.rodolfo.DataTest.repository.TesistaRepository;
+import com.rodolfo.DataTest.model.Revisor;
+import com.rodolfo.DataTest.repository.RevisorRepository;
 
 @Service
-public class TesistaService {
+public class RevisorService {
     @Autowired
-    private TesistaRepository repository;
+    private RevisorRepository repository;
 
-    public Tesista saveUser(Tesista tesista) {
-        return repository.save(tesista);
+    public Revisor saveUser(Revisor revisor) {
+        return repository.save(revisor);
     }
 
-    public Optional<Tesista> getTesistaByMatricula(String matricula) {
+    public Optional<Revisor> getRevisorByMatricula(String matricula) {
         return repository.findById(matricula);
     }
 
-    public Iterable<Tesista> getAllUsers() {
+    public Iterable<Revisor> getAllUsers() {
         return repository.findAll();
     }
 
     public void deleteUser(String id) {
         repository.deleteById(id);
     }
-
-    
 }
-
