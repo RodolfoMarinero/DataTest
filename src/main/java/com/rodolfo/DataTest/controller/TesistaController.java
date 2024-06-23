@@ -1,6 +1,11 @@
 package com.rodolfo.DataTest.controller;
 
+
 import java.util.Optional;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rodolfo.DataTest.model.Tarea;
 import com.rodolfo.DataTest.model.Tesista;
 import com.rodolfo.DataTest.service.TesistaService;
 
@@ -37,8 +41,56 @@ public class TesistaController {
     public Iterable<Tesista> getAllTesista() {
         return service.getAllUsers();
     }
+
     @PostMapping("/agregarTareaA/{matricula}")
     public Tesista addTareaToTesista(@PathVariable String matricula, @RequestBody Tarea tarea) {
         return service.addTareaToTesista(matricula, tarea);
     }
+
+
+    @GetMapping("/filtroPorRevisor/{matricula}")
+        public Iterable<Tesista> getTesistaByRevisor(@PathVariable String matricula) {
+        Iterable<Tesista> allTesistas = this.getAllTesista();
+        List<Tesista> filteredTesistas = new ArrayList<>();
+        
+        for (Tesista tesista : allTesistas) {
+            if (tesista.getRevisor1().equals(matricula) || tesista.getRevisor2().equals(matricula)) {
+                filteredTesistas.add(tesista);
+            }
+        }
+        
+        return filteredTesistas;
+    }
+
+    @GetMapping("/filtroPorDirector/{matricula}")
+    public Iterable<Tesista> getTesistaByMatricula(@PathVariable String matricula) {
+        Iterable<Tesista> allTesistas = this.getAllTesista();
+        List<Tesista> filteredTesistas = new ArrayList<>();
+        
+        for (Tesista tesista : allTesistas) {
+            if (tesista.getDirectorTesis().equals(matricula)) {
+                filteredTesistas.add(tesista);
+            }
+        }
+        
+        return filteredTesistas;
+    }
+
+    @GetMapping("/filtroPorJefe/{carrera}")
+    public Iterable<Tesista> getTesistaByJefe(@PathVariable String carrera) {
+        Iterable<Tesista> allTesistas = this.getAllTesista();
+        List<Tesista> filteredTesistas = new ArrayList<>();
+        
+        for (Tesista tesista : allTesistas) {
+            if (tesista.getCarrera().equals(carrera)) {
+                filteredTesistas.add(tesista);
+            }
+        }
+        
+        return filteredTesistas;
+    
+    }
+
+    
+
 }

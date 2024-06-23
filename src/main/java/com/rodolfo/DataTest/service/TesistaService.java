@@ -44,4 +44,6 @@ public class TesistaService {
             throw new RuntimeException("Tesista no encontrado con matrícula: " + matricula);
         }
     }
+
 }
+
