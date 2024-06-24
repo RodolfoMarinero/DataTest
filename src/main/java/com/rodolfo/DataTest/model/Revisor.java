@@ -18,5 +18,7 @@ public class Revisor {
     public String apellidos;
     public String area;
     public String universidad;
+    public String email;
+    public String contrasena;
     public boolean notificacion;
 }

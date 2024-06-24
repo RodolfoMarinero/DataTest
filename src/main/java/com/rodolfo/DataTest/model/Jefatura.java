@@ -19,4 +19,5 @@ public class Jefatura {
     private String carrera;
     private String universidad;
     private String email;
+    private String contrasena;
 }
