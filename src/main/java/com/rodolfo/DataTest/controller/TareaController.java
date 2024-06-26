@@ -1,5 +1,7 @@
 package com.rodolfo.DataTest.controller;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +20,7 @@ public class TareaController {
 
     @Autowired
     private TareaService service;
+    private AtomicInteger uniqueIdGenerator = new AtomicInteger(0);
 
     @PostMapping("/addTareaRequest")
     public void createTareaWithRequestBody(@RequestBody Tarea tarea) {
@@ -38,4 +41,10 @@ public class TareaController {
     public Iterable<Tarea> filtrarTareasM(@PathVariable String matricula) {
         return service.getTareasByMatricula(matricula);
     }
+    
+    @GetMapping("/generateUniqueId")
+    public int generateUniqueId() {
+        return uniqueIdGenerator.incrementAndGet();
+    }
+    
 }

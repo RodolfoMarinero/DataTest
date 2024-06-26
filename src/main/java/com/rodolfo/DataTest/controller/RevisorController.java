@@ -10,33 +10,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rodolfo.DataTest.model.Revisor;
+import com.rodolfo.DataTest.model.Tesista;
 import com.rodolfo.DataTest.service.RevisorService;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class RevisorController {
-@Autowired
+    @Autowired
     private RevisorService service;
 
-    @PostMapping("/addRevisorPath/{matricula}/{nombre}/{apellidos}/{area}/{universidad}/{notificacion}")
-    public void createRevisorWithPathVariable(@PathVariable String matricula, @PathVariable String nombre, @PathVariable String apellidos, @PathVariable String area, @PathVariable String universidad, @PathVariable boolean notificacion){
-        Revisor a=new Revisor(matricula,nombre,apellidos,area,universidad,notificacion);
-        service.saveUser(a);
-    }
-
-    @PostMapping("/addRevisorRequest")  
-    public void createRevisorWithRequestBody(@RequestBody Revisor revisor){
+    @PostMapping("/addRevisorRequest")
+    public void createRevisorWithRequestBody(@RequestBody Revisor revisor) {
         service.saveUser(revisor);
     }
 
     @DeleteMapping("deleteRevisor/{matricula}")
-    public void deleteRevisor(@PathVariable String matricula){
+    public void deleteRevisor(@PathVariable String matricula) {
         service.deleteUser(matricula);
     }
 
-    @GetMapping("/findallRevisor")
+    @GetMapping("/findAllRevisor")
     public Iterable<Revisor> getAllRevisor() {
         return service.getAllUsers();
     }
+    
+    @GetMapping("/findRevisor/{matricula}")
+    public Revisor getRevisor(@PathVariable String matricula) {
+        return service.getRevisorByMatricula(matricula).orElse(null);
+    }
+
 }

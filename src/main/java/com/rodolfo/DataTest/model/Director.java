@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force=true)
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @Entity
-public class Revisor {
-    @Id
-    public String matricula;
+public class Director {
+        @Id
+    public String id;
     public String nombre;
     public String apellidos;
     public String area;
