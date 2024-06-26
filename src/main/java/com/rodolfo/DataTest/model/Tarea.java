@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 public class Tarea {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String actividad;
     private String estado;

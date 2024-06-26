@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rodolfo.DataTest.model.Revisor;
+import com.rodolfo.DataTest.model.Tesista;
 import com.rodolfo.DataTest.service.RevisorService;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class RevisorController {
-@Autowired
+    @Autowired
     private RevisorService service;
+
 
     @PostMapping("/addRevisorPath/{matricula}/{nombre}/{apellidos}/{area}/{universidad}/{email}/{contrasena}/{notificacion}")
     public void createRevisorWithPathVariable(@PathVariable String matricula, @PathVariable String nombre, @PathVariable String apellidos, @PathVariable String area, @PathVariable String universidad, @PathVariable String email, @PathVariable String contrasena, @PathVariable boolean notificacion){
@@ -31,12 +32,18 @@ public class RevisorController {
     }
 
     @DeleteMapping("deleteRevisor/{matricula}")
-    public void deleteRevisor(@PathVariable String matricula){
+    public void deleteRevisor(@PathVariable String matricula) {
         service.deleteUser(matricula);
     }
 
-    @GetMapping("/findallRevisor")
+    @GetMapping("/findAllRevisor")
     public Iterable<Revisor> getAllRevisor() {
         return service.getAllUsers();
     }
+    
+    @GetMapping("/findRevisor/{matricula}")
+    public Revisor getRevisor(@PathVariable String matricula) {
+        return service.getRevisorByMatricula(matricula).orElse(null);
+    }
+
 }

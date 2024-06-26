@@ -33,17 +33,7 @@ public class TesistaService {
         repository.deleteById(id);
     }
     
-    public Tesista addTareaToTesista(String matricula,Tarea tarea) {
-        Optional<Tesista> optionalTesista = repository.findById(matricula);
-        if (optionalTesista.isPresent()) {
-            Tesista tesista = optionalTesista.get();
-            tarea.setTesista(tesista); 
-            tesista.getTareas().add(tarea);
-            return repository.save(tesista);
-        } else {
-            throw new RuntimeException("Tesista no encontrado con matrícula: " + matricula);
-        }
-    }
+    
 
 }
 
