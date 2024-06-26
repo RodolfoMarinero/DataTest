@@ -19,8 +19,15 @@ public class RevisorController {
     @Autowired
     private RevisorService service;
 
-    @PostMapping("/addRevisorRequest")
-    public void createRevisorWithRequestBody(@RequestBody Revisor revisor) {
+
+    @PostMapping("/addRevisorPath/{matricula}/{nombre}/{apellidos}/{area}/{universidad}/{email}/{contrasena}/{notificacion}")
+    public void createRevisorWithPathVariable(@PathVariable String matricula, @PathVariable String nombre, @PathVariable String apellidos, @PathVariable String area, @PathVariable String universidad, @PathVariable String email, @PathVariable String contrasena, @PathVariable boolean notificacion){
+        Revisor a=new Revisor(matricula,nombre,apellidos,area,universidad,email,contrasena,notificacion);
+        service.saveUser(a);
+    }
+
+    @PostMapping("/addRevisorRequest")  
+    public void createRevisorWithRequestBody(@RequestBody Revisor revisor){
         service.saveUser(revisor);
     }
 

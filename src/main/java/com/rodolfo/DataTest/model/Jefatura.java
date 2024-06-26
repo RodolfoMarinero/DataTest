@@ -18,6 +18,6 @@ public class Jefatura {
     private String apellidos;
     private String carrera;
     private String universidad;
-    private String correoElectronico;
+    private String email;
     private String contrasena;
 }
